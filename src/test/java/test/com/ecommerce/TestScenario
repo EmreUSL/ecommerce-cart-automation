@@ -1,0 +1,12 @@
+
+ecommerce-cart-automation Test Senaryosu
+
+1 - https://www.trendyol.com/ sitesine git
+2 - search view tıkla
+3 - ürün adı yaz
+4 - ürünü arat ve sayfanın yüklenmesini bekle
+5 - ilk sıradaki ürüne tıkla
+6 - açılan sayfanın yüklenmesini bekle
+7 - sepete ekle
+8 - sepete git
+9 - sepete eklediğin ürünün doğruluğunu kontrol et
