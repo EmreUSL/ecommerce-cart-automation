@@ -7,6 +7,10 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.interactions.WheelInput;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class SearchPage extends BasePage {
 
     public SearchPage(WebDriver driver) {
@@ -21,6 +25,13 @@ public class SearchPage extends BasePage {
     private final By goToCart = By.xpath("//a[@class='link account-basket']");
     private final By cartProduct = By.xpath("//div[@class='merchant-item']");
 
+    private final By productRating = By.xpath("//div[@class='quick-filter productRating']");
+    private final By selectedProductRating = By.xpath("//div[@class='quick-filter productRating selected']");
+    private final By productName = By.xpath(".//span[@class='product-name']");
+    private final By productPrices = By.xpath(".//div[@class='price-section']");
+    private final By discountedPrice = By.xpath(".//span[@class='price-value']");
+    private final By lowerPrice = By.xpath(".//div[@class='sale-price']");
+
 
     public void searchItem() {
         click(closeModalBtn);
@@ -28,6 +39,12 @@ public class SearchPage extends BasePage {
         click(searchView);
         setText(searchView, "Erkek Deri Ceket");
         clickEnter(searchView);
+    }
+
+    public void clickTopRated() throws InterruptedException {
+        click(productRating);
+        waitForVisible(selectedProductRating);
+        Thread.sleep(2000);
     }
 
     public void addToCart() {
@@ -70,9 +87,46 @@ public class SearchPage extends BasePage {
                .perform();
    }
 
+   public boolean isCartDisplayed() {
+       return waitForVisible(cartProduct).isDisplayed();
+   }
+
+    public void getAveragePrices() {
+        List<WebElement> productCards = findElements(product);
+        List<String> productList = new ArrayList<>();
+        int index = 1;
+
+        for (WebElement card : productCards) {
+            String name = card.findElement(productName).getText();
+            String price = getPriceFromCard(card);
+
+            productList.add("Product " + index + " | Name: " + name + " | Price: " + price);
+            index++;
+        }
+
+        // Toplu yazdırma
+        System.out.println("\n=== ALL PRODUCTS ===");
+        productList.forEach(System.out::println);
+    }
+
+   private String getPriceFromCard(WebElement card) {
+       By[] pricePaths = {
+               productPrices,
+               discountedPrice,
+               lowerPrice
+       };
+
+       for (By path : pricePaths) {
+           List<WebElement> found = card.findElements(path);
+           if (!found.isEmpty()) {
+               return found.get(0).getText(); // ilk bulduğu fiyatı al
+           }
+       }
+
+       return "NO PRICE"; // hiç fiyat yoksa
+   }
+
+   }
 
 
 
-
-
-}

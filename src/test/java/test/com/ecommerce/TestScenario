@@ -1,6 +1,8 @@
 
 ecommerce-cart-automation Test Senaryosu
 
+Test 1 - Sepete Ürün Ekleme
+
 1 - https://www.trendyol.com/ sitesine git
 2 - search view tıkla
 3 - ürün adı yaz
@@ -10,3 +12,18 @@ ecommerce-cart-automation Test Senaryosu
 7 - sepete ekle
 8 - sepete git
 9 - sepete eklediğin ürünün doğruluğunu kontrol et
+
+
+Test 2 - En Yüksek Puanlı 5 ürünün fiyat ortalamasını alma
+1 - https://www.trendyol.com/ sitesine git
+2 - search view tıkla
+3 - ürün adı yaz
+4 - ürünü arat ve sayfanın yüklenmesini bekle
+5 - yüksek puanlı ürünlere tıkla
+6 - en yüksek puanlı 5 ürünün fiyat ortalamasını al ve yazdır.
+
+879
+2265
+841,93
+7.828
+1199
