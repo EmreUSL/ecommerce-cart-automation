@@ -1,24 +1,25 @@
 package test.com.ecommerce.base;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import com.ecommerce.base.DriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 public class BaseTest {
 
-    protected static WebDriver driver;
+    protected WebDriver driver;
 
-    @BeforeClass
-    public static void setUp() {
+    @BeforeMethod
+    public void setUp() {
         driver = new ChromeDriver();
-        driver.get("https://www.trendyol.com/");
-        driver.manage().window().maximize();
+        DriverManager.setDriver(driver);
+        DriverManager.getDriver().get("https://www.trendyol.com/");
+        DriverManager.getDriver().manage().window().maximize();
     }
 
-    @AfterClass
-    public static void tearDown() {
-        //driver.quit();
+    @AfterMethod
+    public void tearDown() {
+        DriverManager.quitDriver();
     }
 }

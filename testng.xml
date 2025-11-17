@@ -1,0 +1,8 @@
+<suite name="Suite1" parallel="methods" thread-count="2">
+    <parameter name="searchProduct" value="Erkek Deri Ceket" />
+    <test name="trenyolecommerce">
+        <classes>
+            <class name="test.com.ecommerce.test.CardProductTest"/>
+        </classes>
+    </test>
+</suite>

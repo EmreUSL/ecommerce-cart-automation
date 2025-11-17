@@ -5,16 +5,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.interactions.WheelInput;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class SearchPage extends BasePage {
 
-    public SearchPage(WebDriver driver) {
-        super(driver);
+    public SearchPage() {
+        super();
     }
 
     private final By closeModalBtn = By.xpath("//div[@class='modal-section-close']");
@@ -32,12 +30,14 @@ public class SearchPage extends BasePage {
     private final By discountedPrice = By.xpath(".//span[@class='price-value']");
     private final By lowerPrice = By.xpath(".//div[@class='sale-price']");
 
+    Double totalPrices = 0.0;
 
-    public void searchItem() {
+
+    public void searchItem(String searchText) {
         click(closeModalBtn);
         waitForVisible(searchView);
         click(searchView);
-        setText(searchView, "Erkek Deri Ceket");
+        setText(searchView, searchText);
         clickEnter(searchView);
     }
 
@@ -104,9 +104,11 @@ public class SearchPage extends BasePage {
             index++;
         }
 
-        // Toplu yazdırma
         System.out.println("\n=== ALL PRODUCTS ===");
         productList.forEach(System.out::println);
+
+        double averagePrice = totalPrices / (index-1);
+        System.out.println("Average Prices is = " + averagePrice + " total prices =" + totalPrices  + "index =" + index);
     }
 
    private String getPriceFromCard(WebElement card) {
@@ -115,15 +117,17 @@ public class SearchPage extends BasePage {
                discountedPrice,
                lowerPrice
        };
-
        for (By path : pricePaths) {
            List<WebElement> found = card.findElements(path);
            if (!found.isEmpty()) {
-               return found.get(0).getText(); // ilk bulduğu fiyatı al
+               String priceText = found.get(0).getText();
+               priceText = priceText.replace("TL", "").replace(" ", "");
+               priceText = priceText.replace(".", "").replace(",", ".");
+               totalPrices = totalPrices + Double.parseDouble(priceText);
+               return found.get(0).getText();
            }
        }
-
-       return "NO PRICE"; // hiç fiyat yoksa
+       return "NO PRICE";
    }
 
    }
