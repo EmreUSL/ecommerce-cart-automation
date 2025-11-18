@@ -1,0 +1,28 @@
+
+// Kullanıcı Girişi Yap
+
+-- Trendyol go sayfasını aç
+-- Giriş yap butonuna tıkla
+-- valid username ve password gir
+-- login butonuna tıkla
+
+// Yeni adres Ekle
+-- Valid bir şekilde giriş yap
+-- Home Page üzerinde açılan popupta yeni adres butonuna tıkla
+-- search view'a Trendyol yaz
+-- trendyolun açılan valid konumunu seç
+-- bu konumu kullan tuşuna bas
+-- açılan sayfada ekranda ilgili bilgileri doldur.
+-- kaydet butonuna tıkla
+
+// Sepete yemek ekle
+-- ana menüde search kısmına "Tavuk Döner" yaz
+-- 4 puan ve üzeri
+-- go ile teslimat
+-- açık restoranlar
+-- ödeme yöntemi banka ve kredi kartı filtrelerini seç
+-- en yüksek puanlı olan restorana tıkla
+-- tavuk döner yazan bir seçeneği sepete ekle
+-- minimum sepet tutarını geçip geçmediğini kontrol et
+
+
