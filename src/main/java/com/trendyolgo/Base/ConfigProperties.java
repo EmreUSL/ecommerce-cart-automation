@@ -9,20 +9,18 @@ public class ConfigProperties {
     private static final Properties prop = new Properties();
 
     static {
-
         try {
-            InputStream inputStream = ConfigProperties.class.getClassLoader()
-                    .getResourceAsStream("config.properties");
+            InputStream in = ConfigProperties.class.getClassLoader().getResourceAsStream("config.properties");
 
-            if (inputStream != null) {
-                prop.load(inputStream);
+            if (in != null) {
+                prop.load(in);
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    public static String get(String key) {
+    public static String getProperty(String key) {
         return prop.getProperty(key);
     }
 }
