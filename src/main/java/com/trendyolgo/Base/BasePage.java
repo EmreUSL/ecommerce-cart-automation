@@ -11,8 +11,8 @@ import java.time.Duration;
 
 public class BasePage {
 
-    WebDriver driver;
-    WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
@@ -24,12 +24,12 @@ public class BasePage {
     }
 
     public void setText(By locator, String text) {
-        driver.findElement(locator).clear();
-        driver.findElement(locator).sendKeys(text);
+        findElement(locator).clear();
+        findElement(locator).sendKeys(text);
     }
 
     public void click(By locator) {
-        driver.findElement(locator).click();
+        findElement(locator).click();
     }
 
     public void waitElementVisibility(By locator) {
@@ -37,11 +37,15 @@ public class BasePage {
     }
 
     public void enter(By locator) {
-        driver.findElement(locator).sendKeys(Keys.ENTER);
+        findElement(locator).sendKeys(Keys.ENTER);
     }
 
     public void waitElementClickable(By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
+    }
+
+    public boolean isPageDisplayed(By locator) {
+       return driver.findElement(locator).isDisplayed();
     }
 
 

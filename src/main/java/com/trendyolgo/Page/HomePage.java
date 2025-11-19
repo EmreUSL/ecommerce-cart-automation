@@ -2,8 +2,11 @@ package com.trendyolgo.Page;
 
 import com.trendyolgo.Base.BasePage;
 import com.trendyolgo.Base.ConfigProperties;
+import org.jspecify.annotations.Nullable;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class HomePage extends BasePage {
 
@@ -34,7 +37,7 @@ public class HomePage extends BasePage {
     public void setAddNewLocation() {
         click(addNewAdress);
         waitElementVisibility(searchAdress);
-        setText(searchAdress, "Trendyol Campus");
+        setText(searchAdress, ConfigProperties.getProperty("adress"));
         enter(searchAdress);
         waitElementClickable(useLocationBtn);
         click(useLocationBtn);
@@ -42,19 +45,19 @@ public class HomePage extends BasePage {
 
     public void setAddNewAdress() {
         waitElementVisibility(houseNo);
-        setText(houseNo, "45");
-        setText(no, "3");
-        setText(flat, "5");
-        setText(adressTitle, "Home");
-        setText(name, "Emre");
-        setText(surname, "Usul");
-        setText(phone, "5398457890");
+        setText(houseNo, ConfigProperties.getProperty("houseNo"));
+        setText(no, ConfigProperties.getProperty("no"));
+        setText(flat, ConfigProperties.getProperty("flat"));
+        setText(adressTitle, ConfigProperties.getProperty("adressTitle"));
+        setText(name, ConfigProperties.getProperty("name"));
+        setText(surname, ConfigProperties.getProperty("surname"));
+        setText(phone, ConfigProperties.getProperty("phone"));
         setText(submitButton, "Kaydet");
     }
 
     public void searchFood() {
         click(searchFoodArea);
-        setText(searchFoodArea, "Tavuk Döner");
+        setText(searchFoodArea, ConfigProperties.getProperty("searchedFood"));
         click(searchFoodArea);
         waitElementVisibility(aboveFourPointsFilter);
     }
@@ -64,6 +67,10 @@ public class HomePage extends BasePage {
         click(deliveryWithGoFilter);
         click(openRestaurantsFilter);
         click(paymentFilter);
+    }
+
+    public boolean isDisplayed() {
+        return isPageDisplayed(addNewAdress);
     }
 
 
